@@ -1,0 +1,20 @@
+XML representation:
+<contact>
+  <address>
+    <city>Shanghai</city>
+    <street>Long Hua Street</street>
+  </address>
+  <address>
+    <city>Shanghai</city>
+    <street>Dong Quan Street</street>
+  </address>
+  <id>huangyim</id>
+    <name>Huang Yi Ming</name>
+</contact>
+
+
+JSON representation:
+{"contact":[{"address":[{"city":"Shanghai","street":"Long Hua Street"},
+						{"city":"Shanghai","street":"Dong Quan Street"}],
+			 "id":"huangyim",
+			 "name":"Huang Yi Ming"}]}
