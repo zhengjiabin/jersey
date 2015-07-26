@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--http://localhost:8080/jersey/rest/contact/getContact/1 
-	jersey：display-name in web.xml 
+	jersey：web Context root
 	rest：url-pattern under servlet-mapping in web.xml 
 	contact：Class level Path annotation 
 	getContact：Method level Path annotation 
