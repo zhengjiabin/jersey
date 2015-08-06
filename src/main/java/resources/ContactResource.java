@@ -25,6 +25,8 @@ import javax.xml.bind.JAXBElement;
 
 import bean.Contact;
 
+import com.sun.jersey.spi.resource.Singleton;
+
 /**
  * <pre>
  * @Context：使用该注释注入上下文对象
@@ -39,6 +41,9 @@ import bean.Contact;
  * @BeanParam：当请求参数很多时，比如客户端提交一个修改用户的PUT请求，请求中包含很多项用户信息
  * @FormParam：从POST请求的表单参数中获取数据
  * 
+ * @Singleton：在应用范围内，只会创建资源类的一个实例
+ * @PerRequest：默认情况下，资源类的生命周期是per-request，也就是系统会为每个匹配资源类URI的请求创建一个实例
+ * 
  * HTTP GET：获取/列出/检索单个资源或资源集合。
  * HTTP POST：新建资源。
  * HTTP PUT：更新现有资源或资源集合。
@@ -48,6 +53,7 @@ import bean.Contact;
  * @author Administrator
  * 
  */
+@Singleton
 @Path(value = "/contact")
 public class ContactResource {
     @Context
@@ -55,6 +61,9 @@ public class ContactResource {
     
     @Context
     Request request;
+    
+    @Context
+    HttpHeaders httpHeader;
     
     @GET
     @Path(value = "getContact1/{id}")
@@ -87,7 +96,7 @@ public class ContactResource {
      */
     @POST
     @Path(value = "getContact3")
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Produces(MediaType.TEXT_HTML)
     public String getContact3(Contact contact) {
         return contact.getId();
@@ -127,7 +136,7 @@ public class ContactResource {
     }
     
     @PUT
-    @Consumes(MediaType.APPLICATION_XML)
+    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response putContact(JAXBElement<Contact> jaxbContact) {
         Contact c = jaxbContact.getValue();
         if (c == null) {
